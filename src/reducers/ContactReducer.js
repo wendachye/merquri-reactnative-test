@@ -1,19 +1,30 @@
 import {useReducer, useCallback} from 'react';
-import contacts from '../../data.json';
+import rawContacts from '../../data.json';
 import * as utils from '../utils/stringUtils';
+
+const sortFirstName = (a, b) => {
+  if (a.firstName < b.firstName) {
+    return -1;
+  }
+  if (a.firstName > b.firstName) {
+    return 1;
+  }
+  return 0;
+};
 
 const initialState = {
   isLoading: false,
-  contacts,
+  contacts: rawContacts.sort(sortFirstName),
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case 'RESTORE_CONTACTS':
+    case 'RESTORE_CONTACTS': {
       return {
         ...state,
-        contacts,
+        contacts: rawContacts.sort(sortFirstName),
       };
+    }
     case 'ADD_NEW_CONTACT': {
       let newContact = {
         ...action.contact,
@@ -24,7 +35,7 @@ const reducer = (state, action) => {
 
       return {
         ...state,
-        contacts: newContacts,
+        contacts: newContacts.sort(sortFirstName),
       };
     }
     case 'EDIT_NEW_CONTACT': {

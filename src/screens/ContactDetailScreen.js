@@ -1,5 +1,11 @@
 import React, {useContext, useLayoutEffect, useState} from 'react';
-import {StyleSheet, ScrollView, View, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  ScrollView,
+  View,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
 import {
   ThemeContext,
   Text,
@@ -40,10 +46,28 @@ const ContactDetailScreen = ({navigation, route}) => {
   }, [navigation, value]);
 
   const validateForm = () => {
-    if (utils.regNotEmpty(value.firstName)) {
+    if (!utils.regNotEmpty(value.firstName)) {
+      Alert.alert('First Name is required');
+
+      return false;
     }
 
-    if (utils.regNotEmpty(value.lastName)) {
+    if (!utils.regNotEmpty(value.lastName)) {
+      Alert.alert('Last Name is required');
+
+      return false;
+    }
+
+    if (utils.regNotEmpty(value.email) && !utils.regEmail(value.email)) {
+      Alert.alert('Email format is incorrect');
+
+      return false;
+    }
+
+    if (!utils.regNotEmpty(value.phone)) {
+      Alert.alert('Phone No is required');
+
+      return false;
     }
 
     return true;
@@ -51,15 +75,14 @@ const ContactDetailScreen = ({navigation, route}) => {
 
   const onPressSaveContact = async () => {
     try {
-      // if (validateForm) {
-      if (contact) {
-        await editNewContact(value);
-      } else {
-        await addNewContact(value);
+      if (validateForm()) {
+        if (contact) {
+          await editNewContact(value);
+        } else {
+          await addNewContact(value);
+        }
+        navigation.goBack();
       }
-
-      navigation.goBack();
-      // }
     } catch (error) {
       console.log(error);
     }
