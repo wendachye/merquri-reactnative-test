@@ -199,7 +199,6 @@
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				802E2B6EC6EA7F11D5F23C4E /* [CP] Embed Pods Frameworks */,
 				284ED6413FD5CA56DE9AEF08 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -222,7 +221,6 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				03D49BBCE28B9D663B106097 /* [CP] Embed Pods Frameworks */,
 				CFEBDA5ED41C80E30FA22741 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -304,23 +302,6 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
-		03D49BBCE28B9D663B106097 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-merquri_reactnative_test/Pods-merquri_reactnative_test-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-merquri_reactnative_test/Pods-merquri_reactnative_test-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-merquri_reactnative_test/Pods-merquri_reactnative_test-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		117C20E9FFDCBD530CB86655 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -380,23 +361,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		802E2B6EC6EA7F11D5F23C4E /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-merquri_reactnative_test-merquri_reactnative_testTests/Pods-merquri_reactnative_test-merquri_reactnative_testTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-merquri_reactnative_test-merquri_reactnative_testTests/Pods-merquri_reactnative_test-merquri_reactnative_testTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-merquri_reactnative_test-merquri_reactnative_testTests/Pods-merquri_reactnative_test-merquri_reactnative_testTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CFEBDA5ED41C80E30FA22741 /* [CP] Copy Pods Resources */ = {
@@ -471,6 +435,7 @@
 			baseConfigurationReference = 4679F779A80A3399A50B489E /* Pods-merquri_reactnative_test-merquri_reactnative_testTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = S28G3UKW92;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -499,6 +464,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = S28G3UKW92;
 				INFOPLIST_FILE = merquri_reactnative_testTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -524,6 +490,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = S28G3UKW92;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = merquri_reactnative_test/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -550,6 +517,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = S28G3UKW92;
 				INFOPLIST_FILE = merquri_reactnative_test/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

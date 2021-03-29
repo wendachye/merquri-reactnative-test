@@ -57,6 +57,15 @@ const reducer = (state, action) => {
         contacts: newContacts,
       };
     }
+    case 'FILTERED_CONTACTS': {
+      const filteredText = action.text;
+
+      console.log(filteredText);
+
+      return {
+        ...state,
+      };
+    }
     default:
       return state;
   }

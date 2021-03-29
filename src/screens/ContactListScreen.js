@@ -1,18 +1,23 @@
-import React, {useContext, useLayoutEffect, useEffect, useState} from 'react';
-import {StyleSheet, FlatList, View, TouchableOpacity} from 'react-native';
-import {ThemeContext, Icon, Avatar, Text, Divider} from 'react-native-elements';
+import React, {useContext, useLayoutEffect, useState} from 'react';
+import {StyleSheet, FlatList, View} from 'react-native';
+import {ThemeContext, Icon} from 'react-native-elements';
 import useContactContext from '../contexts/ContactContext';
+import Contact from '../components/ContactComponent';
 
 const ContactListScreen = ({navigation}) => {
   const {state, restoreContacts} = useContactContext();
   const {theme} = useContext(ThemeContext);
   const styles = useStyles(theme);
-  const [refreshing, serRefreshing] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
 
   useLayoutEffect(() => {
     navigation.setOptions({
       headerTitle: 'Contacts',
+      headerTitleStyle: {alignSelf: 'center'},
       headerTintColor: theme.colors.primary,
+      headerStyle: {
+        backgroundColor: theme.colors.backgroundColor,
+      },
       headerLeft: () => (
         <Icon
           name="search"
@@ -36,61 +41,30 @@ const ContactListScreen = ({navigation}) => {
 
   const onRefresh = () => {
     try {
-      serRefreshing(true);
+      setRefreshing(true);
       restoreContacts();
     } catch (error) {
       console.log(error);
     } finally {
-      serRefreshing(false);
+      setRefreshing(false);
     }
   };
 
-  const onPressSearchContact = () => {};
+  const onPressSearchContact = () => {
+    navigation.navigate('SearchContact');
+  };
 
   const onPressAddContact = () => {
     navigation.navigate('ContactDetail');
-  };
-
-  const onPressContactDetail = contact => {
-    navigation.navigate('ContactDetail', {contact});
-  };
-
-  const renderContact = ({item}) => {
-    return (
-      <TouchableOpacity onPress={() => onPressContactDetail(item)}>
-        <View style={styles.contactContainer}>
-          {item.image ? (
-            <Avatar
-              rounded
-              size="medium"
-              source={{
-                uri: `${item.image}`,
-              }}
-              containerStyle={styles.contactAvatar}
-            />
-          ) : (
-            <Avatar
-              rounded
-              size="medium"
-              title={`${item?.firstName.substring(0, 1)}`}
-              containerStyle={styles.contactAvatar}
-            />
-          )}
-          <Text
-            style={
-              styles.contactNameText
-            }>{`${item.firstName} ${item.lastName}`}</Text>
-        </View>
-        <Divider style={styles.divider} />
-      </TouchableOpacity>
-    );
   };
 
   return (
     <View style={styles.container}>
       <FlatList
         data={state.contacts}
-        renderItem={renderContact}
+        renderItem={({item}) => {
+          return <Contact navigation={navigation} contact={item} />;
+        }}
         keyExtractor={contact => contact.id}
         refreshing={refreshing}
         onRefresh={onRefresh}
@@ -103,28 +77,13 @@ const useStyles = theme => {
   return StyleSheet.create({
     container: {
       flex: 1,
+      backgroundColor: theme.colors.backgroundColor,
     },
     headerLeftButton: {
       marginStart: 10,
     },
     headerRightButton: {
       marginEnd: 10,
-    },
-    contactContainer: {
-      flexDirection: 'row',
-      backgroundColor: 'white',
-      padding: 15,
-      alignItems: 'center',
-    },
-    contactAvatar: {
-      backgroundColor: theme.colors.primary,
-      marginEnd: 15,
-    },
-    contactNameText: {
-      fontSize: 18,
-    },
-    divider: {
-      marginHorizontal: 15,
     },
   });
 };

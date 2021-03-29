@@ -14,14 +14,26 @@ import contactReducer from './reducers/ContactReducer';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
+  const styles = useStyles(isDarkMode);
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  const theme = {
+  const defaultTheme = {
     colors: {
       primary: '#ff8c00',
+      secondary: Colors.darker,
+      backgroundColor: Colors.lighter,
+      backgroundColorSecondary: 'lightgray',
+    },
+  };
+
+  const darkTheme = {
+    colors: {
+      primary: '#ff8c00',
+      secondary: Colors.lighter,
+      backgroundColor: Colors.darker,
+      backgroundColorSecondary: 'dimgray',
+    },
+    backgroundColor: {
+      primary: Colors.darker,
     },
   };
 
@@ -61,71 +73,28 @@ const App = () => {
   );
 
   return (
-    <SafeAreaView style={[backgroundStyle, styles.safeAreaView]}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ThemeProvider theme={theme}>
+    <ThemeProvider
+      useDark={isDarkMode}
+      theme={isDarkMode ? darkTheme : defaultTheme}>
+      <SafeAreaView style={styles.safeAreaView}>
+        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
         <NavigationContainer>
           <ContactProvider value={contactContext}>
             <AppNavigator />
           </ContactProvider>
         </NavigationContainer>
-      </ThemeProvider>
-    </SafeAreaView>
+      </SafeAreaView>
+    </ThemeProvider>
   );
-
-  // return (
-  //   <NavigationContainer>
-  //     <SafeAreaView style={backgroundStyle}>
-  //       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-  //       <ScrollView
-  //         contentInsetAdjustmentBehavior="automatic"
-  //         style={backgroundStyle}>
-  //         <Header />
-  //         <View
-  //           style={{
-  //             backgroundColor: isDarkMode ? Colors.black : Colors.white,
-  //           }}>
-  //           <Section title="Step One">
-  //             Edit <Text style={styles.highlight}>App.js</Text> to change this
-  //             screen and then come back to see your edits.
-  //           </Section>
-  //           <Section title="See Your Changes">
-  //             <ReloadInstructions />
-  //           </Section>
-  //           <Section title="Debug">
-  //             <DebugInstructions />
-  //           </Section>
-  //           <Section title="Learn More">
-  //             Read the docs to discover what to do next:
-  //           </Section>
-  //           <LearnMoreLinks />
-  //         </View>
-  //       </ScrollView>
-  //     </SafeAreaView>
-  //   </NavigationContainer>
-  // );
 };
 
-const styles = StyleSheet.create({
-  safeAreaView: {
-    flex: 1,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
+const useStyles = isDarkMode => {
+  return StyleSheet.create({
+    safeAreaView: {
+      flex: 1,
+      backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    },
+  });
+};
 
 export default App;

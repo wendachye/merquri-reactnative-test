@@ -1,6 +1,7 @@
 import React, {useContext, useLayoutEffect, useState} from 'react';
 import {
   StyleSheet,
+  Dimensions,
   ScrollView,
   View,
   TouchableOpacity,
@@ -31,7 +32,12 @@ const ContactDetailScreen = ({navigation, route}) => {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerTitle: '',
+      headerTitle: contact ? 'Edit Contact' : 'New Contact',
+      headerTitleStyle: {alignSelf: 'center'},
+      headerTintColor: theme.colors.primary,
+      headerStyle: {
+        backgroundColor: theme.colors.backgroundColor,
+      },
       headerLeft: () => (
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Text style={styles.headerLeftButton}>Cancel</Text>
@@ -190,9 +196,13 @@ const ContactDetailScreen = ({navigation, route}) => {
 };
 
 const useStyles = theme => {
+  const windowHeight = Dimensions.get('window').height;
+
   return StyleSheet.create({
     container: {
       flex: 1,
+      height: windowHeight,
+      backgroundColor: theme.colors.backgroundColorSecondary,
     },
     headerLeftButton: {
       marginStart: 10,
@@ -207,7 +217,7 @@ const useStyles = theme => {
     avatarContainer: {
       paddingVertical: 15,
       alignItems: 'center',
-      backgroundColor: 'white',
+      backgroundColor: theme.colors.backgroundColor,
     },
     contactAvatar: {
       backgroundColor: theme.colors.primary,
@@ -217,10 +227,11 @@ const useStyles = theme => {
       fontWeight: '500',
       paddingVertical: 5,
       paddingHorizontal: 15,
+      color: theme.colors.secondary,
     },
     contactContainer: {
       paddingHorizontal: 15,
-      backgroundColor: 'white',
+      backgroundColor: theme.colors.backgroundColor,
     },
     contactFlexRow: {
       flexDirection: 'row',
@@ -229,6 +240,7 @@ const useStyles = theme => {
     },
     contactDetailTitleText: {
       fontSize: 16,
+      color: theme.colors.secondary,
     },
     containerStyle: {
       maxHeight: 36,
@@ -239,6 +251,7 @@ const useStyles = theme => {
       height: 36,
       paddingHorizontal: 10,
       fontSize: 16,
+      color: theme.colors.secondary,
     },
     inputContainerStyle: {
       borderRadius: 5,
