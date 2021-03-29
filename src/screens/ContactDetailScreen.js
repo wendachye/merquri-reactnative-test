@@ -48,25 +48,11 @@ const ContactDetailScreen = ({navigation, route}) => {
   const validateForm = () => {
     if (!utils.regNotEmpty(value.firstName)) {
       Alert.alert('First Name is required');
-
       return false;
     }
 
     if (!utils.regNotEmpty(value.lastName)) {
       Alert.alert('Last Name is required');
-
-      return false;
-    }
-
-    if (utils.regNotEmpty(value.email) && !utils.regEmail(value.email)) {
-      Alert.alert('Email format is incorrect');
-
-      return false;
-    }
-
-    if (!utils.regNotEmpty(value.phone)) {
-      Alert.alert('Phone No is required');
-
       return false;
     }
 
