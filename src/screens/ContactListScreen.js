@@ -16,6 +16,7 @@ const ContactListScreen = ({navigation}) => {
       headerLeft: () => (
         <Icon
           name="search"
+          size={28}
           color={theme.colors.primary}
           onPress={onPressSearchContact}
           containerStyle={styles.headerLeftButton}
@@ -24,6 +25,7 @@ const ContactListScreen = ({navigation}) => {
       headerRight: () => (
         <Icon
           name="add"
+          size={28}
           color={theme.colors.primary}
           onPress={onPressAddContact}
           containerStyle={styles.headerRightButton}
